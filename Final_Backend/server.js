@@ -4,6 +4,10 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const dotenv = require('dotenv');
+const dns=require("dns");
+
+// change dns
+dns.setServers(["1.1.1.1","8.8.8.8"]);
 
 dotenv.config();
 
@@ -12,7 +16,7 @@ const app = express();
 // ─── Security Middleware ───────────────────────────────────────────────────────
 app.use(helmet());
 app.use(cors({
-  origin: 'http://127.0.0.1:5500' || 'http://localhost:5500',
+  origin: ["http://127.0.0.1:5500", "http://localhost:5500", "http://localhost:3000", "*"],
   credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));
@@ -70,3 +74,5 @@ mongoose
     console.error('❌ MongoDB connection failed:', err.message);
     process.exit(1);
   });
+
+ 
