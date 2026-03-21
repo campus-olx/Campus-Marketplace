@@ -61,18 +61,22 @@ const PORT = process.env.PORT || 5000;
 
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(async () => {
-    console.log('✅ MongoDB connected');
+  .then(() => {
+    console.log("✅ MongoDB connected");
 
-    // Verify SMTP on startup so you know immediately if email is broken
-    const { verifyEmailConnection } = require('./utils/email.util');
-    await verifyEmailConnection();
-
-    app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+    // Run email check but DON'T block server
+    const { verifyEmailConnection } = require("./utils/email.util");
+    verifyEmailConnection().catch(err =>
+      console.error("Email check failed:", err.message)
+    );
   })
   .catch((err) => {
-    console.error('❌ MongoDB connection failed:', err.message);
-    process.exit(1);
+    console.error("❌ MongoDB connection failed:", err.message);
   });
+
+// ✅ Start server immediately
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
 
  
