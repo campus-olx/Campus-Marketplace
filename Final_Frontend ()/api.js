@@ -3,7 +3,7 @@
 //  Change API_BASE here to update everywhere at once
 // ─────────────────────────────────────────────────────────────
 
- const API_BASE = "http://localhost:5000";
+ const API_BASE = "https://campus-marketplace-tglk.onrender.com/api/listings";
 
 // ── Token helpers ────────────────────────────────────────────
 function getToken() {
