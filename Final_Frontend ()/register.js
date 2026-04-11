@@ -6,23 +6,23 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const form      = document.getElementById("registerForm");
-  const inputs    = form.querySelectorAll("input");
+  const form = document.getElementById("registerForm");
+  const inputs = form.querySelectorAll("input");
   const submitBtn = form.querySelector('button[type="submit"]');
 
   // Assign IDs to inputs by their type/order
-  inputs[0].id          = "regName";
+  inputs[0].id = "regName";
   inputs[0].placeholder = "Full Name";
-  inputs[1].id          = "regEmail";
+  inputs[1].id = "regEmail";
   inputs[1].placeholder = "your.name@iitj.ac.in";
-  inputs[2].id          = "regPassword";
+  inputs[2].id = "regPassword";
   inputs[2].placeholder = "Min 8 characters";
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const name     = document.getElementById("regName").value.trim();
-    const email    = document.getElementById("regEmail").value.trim();
+    const name = document.getElementById("regName").value.trim();
+    const email = document.getElementById("regEmail").value.trim();
     const password = document.getElementById("regPassword").value;
 
     if (!email.endsWith("@iitj.ac.in")) {
@@ -34,13 +34,17 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    submitBtn.disabled    = true;
+    submitBtn.disabled = true;
     submitBtn.textContent = "Registering...";
 
     try {
-      const res  = await fetch(`${API_BASE}/api/auth/register`, {
+      // const res  = await fetch(`${API_BASE}/api/auth/register`, {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({ name, email, password }),
+      // });
+      const res = await apiFetch("/api/auth/register", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
       });
       const data = await res.json();
@@ -56,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
       showToast("Cannot reach server. Is the backend running?", "error");
       console.error(err);
     } finally {
-      submitBtn.disabled    = false;
+      submitBtn.disabled = false;
       submitBtn.textContent = "Register";
     }
   });
