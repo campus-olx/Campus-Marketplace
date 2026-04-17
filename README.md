@@ -57,7 +57,9 @@ Only college members can participate, ensuring reliability.</p>
 </ul>
 
 <h3>Theme Alignment</h3>
-<p>This project addresses the Broken College Stack theme by redesigning how resources circulate within campuses through a structured and technology-driven marketplace.</p>
+<p>This project addresses the Broken College Stack theme by redesigning how resources circulate within campuses through a structured and technology-driven marketplace.
+     https://campus-arketplace.netlify.app/
+</p>
 
 <h3>Team Members</h3>
 <ul>
